@@ -1,7 +1,7 @@
 (function (global) {
 
   // Set up a namespace for our utility
-  var ajaxUtils = {};
+  let ajaxUtils = {};
   
   
   // Returns an HTTP request object
@@ -23,7 +23,7 @@
   // Makes an Ajax GET request to 'requestUrl'
   ajaxUtils.sendGetRequest = 
     function(requestUrl, responseHandler, isJsonResponse) {
-      var request = getRequestObject();
+      let request = getRequestObject();
       request.onreadystatechange = 
         function() { 
           handleResponse(request, 
