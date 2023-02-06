@@ -1,7 +1,7 @@
 (function (global) {
 
 // Set up a namespace for our utility
-var ajaxUtils = {};
+let ajaxUtils = {};
 
 
 // Returns an HTTP request object
@@ -57,6 +57,7 @@ function handleResponse(request,
     }
   }
 }
+
 
 
 // Expose utility to the global object

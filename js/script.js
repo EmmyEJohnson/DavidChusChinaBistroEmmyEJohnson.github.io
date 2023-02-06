@@ -19,7 +19,7 @@ let allCategoriesUrl =
 let categoriesTitleHtml = "snippets/categories-title-snippet.html";
 let categoryHtml = "snippets/category-snippet.html";
 let menuItemsUrl =
-  "https://coursera-jhu-default-rtdb.firebaseio.com/menu_items/{cat_short_name}.json";
+  "https://coursera-jhu-default-rtdb.firebaseio.com/menu_items/";
 let menuItemsTitleHtml = "snippets/menu-items-title.html";
 let menuItemHtml = "snippets/menu-item.html";
 
@@ -36,7 +36,7 @@ let showLoading = function (selector) {
   insertHtml(selector, html);
 };
 
-// Return substitute of '{{propName}}'
+// Return substitute of '{{propName}}' catShortName
 // with propValue in given 'string'
 let insertProperty = function (string, propName, propValue) {
   let propToReplace = "{{" + propName + "}}";
@@ -83,8 +83,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 showLoading("#main-content");
 $ajaxUtils.sendGetRequest(
   allCategoriesUrl,
-  buildAndShowHomeHTML,  // ***** <---- TODO: STEP 1: Substitute [...] ******
-  true); // Explicitly setting the flag to get JSON from server processed into an object literal
+  buildAndShowHomeHTML, // ***** <---- TODO: STEP 1: Substitute [...] ******
+  true); // Explicitely setting the flag to get JSON from server processed into an object literal
 });
 // *** finish **
 
@@ -100,10 +100,9 @@ function buildAndShowHomeHTML (categories) {
 
       // TODO: STEP 2: Here, call chooseRandomCategory, passing it retrieved 'categories'
       // Pay attention to what type of data that function returns vs what the chosenCategoryShortName
-      // ariable's name implies it expects.
-      // let chosenCategoryShortName = ....
+      // variable's name implies it expects.
+      // var chosenCategoryShortName = ....
       let chosenCategoryShortName = chooseRandomCategory(categories).short_name;
-      console.log(homeHtml);
 
 
       // TODO: STEP 3: Substitute {{randomCategoryShortName}} in the home html snippet with the
@@ -117,14 +116,15 @@ function buildAndShowHomeHTML (categories) {
       // Hint: you need to surround the chosen category short name with something before inserting
       // it into the home html snippet.
       //
-      // let homeHtmlToInsertIntoMainPage = ....
-      let homeHtmlToInsertIntoMainPage = insertProperty(homeHtml, "randomCategoryShortName", "'" + chosenCategoryShortName + "'");
+      chosenCategoryShortName = "'" + chosenCategoryShortName + "'";
+      let homeHtmlToInsertIntoMainPage = insertProperty(homeHtml, "randomCategoryShortName", chosenCategoryShortName);
+
 
       // TODO: STEP 4: Insert the the produced HTML in STEP 3 into the main page
       // Use the existing insertHtml function for that purpose. Look through this code for an example
       // of how to do that.
       // ....
-      insertHtml("#main-content", homeHtmlToInsertIntoMainPage)
+      insertHtml('#main-content', homeHtmlToInsertIntoMainPage);
 
     },
     false); // False here because we are getting just regular HTML from the server, so no need to process JSON.
